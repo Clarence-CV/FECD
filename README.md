@@ -1,4 +1,4 @@
 # FECD
 
-## Learning to Discovery Generalized Facial Expressions
+## Learning to Discover Generalized Facial Expressions
 
