@@ -1,5 +1,5 @@
-# FECD
+# G-FACE
 
-## Learning to Discover Generalized Facial Expressions
+## DIG-FACE: De-biased Learning for Generalized Facial Expression Category Discovery
 
 Coming Soon！
