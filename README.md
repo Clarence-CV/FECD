@@ -1,5 +1,5 @@
 # Task: G-FACE
-![assets](assets/assets.jpg)
+![assets](assets/G-FACE.jpg)
 ## DIG-FACE: De-biased Learning for Generalized Facial Expression Category Discovery
 
 
