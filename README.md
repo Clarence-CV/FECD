@@ -1,6 +1,7 @@
 # Task: G-FACE
 
 <img src="assets/G-FACE.jpg" width="600"/>
+
 ## DIG-FACE: De-biased Learning for Generalized Facial Expression Category Discovery
 
 
