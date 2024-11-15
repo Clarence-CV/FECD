@@ -20,3 +20,37 @@ implicit bias, coming from an underlying distributional gap between new categori
 ```
 pip install -r requirements.txt
 ```
+
+### Scripts
+
+**Train the model**:
+
+```
+bash scripts/run_${DATASET_NAME}.sh
+```
+
+### Datasets
+
+We use FER datasets  in this paper, including:
+
+RAF-DB, FerPlus and AffectNet.
+
+Download [RAF-DB](http://www.whdeng.cn/RAF/model1.html#dataset), put the RAF-DB-Basic folder under the dataset folder:
+```key
+-FERdata/
+  raf-basic/
+	   Image/aligned/
+	     train_00001_aligned.jpg
+	     test_0001_aligned.jpg
+	     ...
+
+```
+Before RAF-DB-Compound training, it is first necessary to ensure that both basic expressions and compound expressions are available in the dataset, so that we can do the discovery of composite classes based on the basic classes.
+put the  RAF-DB-compound folder under the dataset folder:
+```key
+-FERdata/
+  raf-comp/
+	   compound-aligned/
+	     train_00001_aligned.jpg
+	     test_0001_aligned.jpg
+	     ...
