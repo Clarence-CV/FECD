@@ -36,13 +36,13 @@ class RafDataset(data.Dataset):
         self.transform = transform
         if dataset_name == "rafdb":
             df = pd.read_csv('./FERdata/list_patition_label.txt', sep=' ', header=None)
-            name_c = 0#图片名称列
-            label_c = 1#图片标签列
+            name_c = 0
+            label_c = 1
 
             if phase == 'train':
-                dataset = df[df[name_c].str.startswith('train')]#训练集
+                dataset = df[df[name_c].str.startswith('train')]
             else:
-                dataset = df[df[name_c].str.startswith('test')]#测试集
+                dataset = df[df[name_c].str.startswith('test')]
 
             self.targets = dataset.iloc[:, label_c].values
             images_names = dataset.iloc[:, name_c].values
@@ -57,14 +57,14 @@ class RafDataset(data.Dataset):
 
         elif dataset_name == "ferplus":
             df = pd.read_csv('./FERdata/Ferplus/ferplus_labels.csv')
-            name_c = "Image"#图片名称列
+            name_c = "Image"
             
-            label_c = "Emotion"#图片标签列
+            label_c = "Emotion"
 
             if phase == 'train':
-                dataset = df[df["Type"] == "train"]#训练集
+                dataset = df[df["Type"] == "train"]
             else:
-                dataset = df[df["Type"] == "test"]#测试集
+                dataset = df[df["Type"] == "test"]
 
             self.targets = dataset[label_c].values
             images_names = dataset[name_c].values
@@ -124,7 +124,6 @@ class MergedDataset(Dataset):
         return len(self.unlabelled_dataset) + len(self.labelled_dataset)
     
 
-#随机均衡
 def subsample_instances(dataset, prop_indices_to_subsample=0.8):
 
     np.random.seed(0)
@@ -150,14 +149,10 @@ def subsample_dataset(dataset, idxs):
         return None
     
 def subsample_classes(dataset, include_classes):
-    #从完整训练集中提取的，其中仅包含指定的类别（train_classes）的样本
+
 
     cls_idxs = [x for x, t in enumerate(dataset.targets) if t in include_classes]
-#     target_xform_dict = {}
-#     for i, k in enumerate(include_classes):
-#         target_xform_dict[k] = i
-#     #{0: 0, 1: 1, 8: 2, 9: 3}
-#     print("将选中的标签映射到连续的整数编码",target_xform_dict)
+
     dataset = subsample_dataset(dataset, cls_idxs)
 
 
@@ -277,52 +272,10 @@ from sklearn.manifold import TSNE
 
 def get_fer_data(data_path="SimGCD/data_embed_npy.npy",
                  label_path="SimGCD/label_npu.npy"):
-    """
-    该函数读取上一步保存的两个npy文件，返回data和label数据
-    Args:
-        data_path:
-        label_path:
 
-    Returns:
-        data: 样本特征数据，shape=(BS,embed)
-        label: 样本标签数据，shape=(BS,)
-        n_samples :样本个数
-        n_features：样本的特征维度
-
-    """
     data = np.load(data_path)
     label = np.load(label_path)
     n_samples, n_features = data.shape
 
     return data, label, n_samples, n_features
 
-color_map = ['r','y','k','g','b','m','c'] # 7个类，准备7种颜色
-def plot_embedding_2D(data, label, title):
-    
-    x_min, x_max = np.min(data, 0), np.max(data, 0)
-    data = (data - x_min) / (x_max - x_min)
-    fig = plt.figure()
-    for i in range(data.shape[0]):
-        plt.plot(data[i, 0], data[i, 1],marker='o',markersize=1,color=color_map[label[i]])
-    plt.xticks([])
-    plt.yticks([])
-    plt.title(title)
-    return fig
-
-
-def main():
-    data, label, n_samples, n_features = get_fer_data()  # 根据自己的路径合理更改
-
-    print('Begining......') 
-
-    # 调用t-SNE对高维的data进行降维，得到的2维的result_2D，shape=(samples,2)
-    tsne_2D = TSNE(n_components=2, init='pca', random_state=0) 
-    result_2D = tsne_2D.fit_transform(data)
-    
-    print('Finished......')
-    fig1 = plot_embedding_2D(result_2D, label, 't-SNE')	# 将二维数据用plt绘制出来
-    fig1.show()
-    plt.pause(50)
-    
-if __name__ == '__main__':
-    main()
