@@ -55,6 +55,20 @@ put the  RAF-DB-compound folder under the dataset folder:
 	     test_0001_aligned.jpg
 	     ...
 
-
+```
+Download [FerPlus](https://github.com/microsoft/FERPlus), put the FerPlus folder under the dataset folder:
+```key
+-FERdata/
+  FerPlus/
+	   train/
+	     fer0000001.jpg
+	     fer0000002.jpg
+	     ...
+	   test/
+             fer0000001.jpg
+	     fer0000002.jpg
+	     ...
+           ferplus_labels.csv
+```
 
 AffectNet is a large-scale FER dataset, access to which is subject to licensing in link [AffectNet](http://mohammadmahoor.com/affectnet/),
